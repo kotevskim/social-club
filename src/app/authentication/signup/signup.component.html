@@ -1,6 +1,7 @@
 <div class="col-md-6 col-md-offset-3">
   <h2>Signup</h2>
-<app-error-alert *ngIf="showError" [errorMessage]="errorMessage"></app-error-alert>
+  <app-error-alert *ngIf="showError" [errorMessage]="errorMessage"></app-error-alert>
+  <!-- ngForm contains the signup form data. -->
   <form name="form" (ngSubmit)="onSignup(signupFormData)" #signupFormData='ngForm'>
       <div class="form-group">
           <label for="name">Name</label>

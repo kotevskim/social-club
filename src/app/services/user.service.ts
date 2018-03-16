@@ -2,6 +2,7 @@ import { USERS_CHILD } from './database-constants';
 import { User } from './../models/user';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * User service
@@ -20,6 +21,10 @@ export class UserService {
 
   public addUser(user: User): void {
     this.fireDb.object(`${USERS_CHILD}/${user.uid}`).set(user);
+  }
+
+  public getUser(uid: string): Observable<User> {
+    return this.fireDb.object<User>(`${USERS_CHILD}/${uid}`).valueChanges();
   }
 
 }

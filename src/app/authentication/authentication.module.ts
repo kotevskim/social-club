@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { SignupComponent } from './signup/signup.component';
 import { ErrorAlertComponent } from '../shared/error-alert/error-alert.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { ErrorAlertComponent } from '../shared/error-alert/error-alert.component
   ],
   declarations: [
     SignupComponent,
-    ErrorAlertComponent
+    ErrorAlertComponent,
+    LoginComponent
   ],
   providers: [
     AuthenticationService,

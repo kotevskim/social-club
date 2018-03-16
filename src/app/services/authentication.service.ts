@@ -20,4 +20,11 @@ export class AuthenticationService {
     return this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
+  public login(email: string, password: string): Promise<any> {
+    return this.angularFireAuth.auth.signInWithEmailAndPassword(email, password);
+  }
+
+  public resetPassword(email: string): Promise<any> {
+    return this.angularFireAuth.auth.sendPasswordResetEmail(email);
+  }
 }
