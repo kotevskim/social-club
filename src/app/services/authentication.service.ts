@@ -39,4 +39,13 @@ export class AuthenticationService {
   public signout(): Promise<any> {
     return this.angularFireAuth.auth.signOut();
   }
+
+  public changeEmail(email: string): Promise<any> {
+    return this.angularFireAuth.auth.currentUser.updateEmail(email);
+  }
+
+  public changePassword(password: string): Promise<any> {
+    return this.angularFireAuth.auth.currentUser
+    .updatePassword(password);
+  }
 }

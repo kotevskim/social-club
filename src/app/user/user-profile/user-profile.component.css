@@ -1,0 +1,25 @@
+
+.user-profile {
+  margin-top: 50px;
+}
+
+.user-profile-info-row {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #dce5f4;
+}
+
+.user-profile-info-row-label {
+  color: #626872;
+  font-size: small;
+}
+
+.user-profile-info-row-value {
+  font-size: 1.5em;
+  /* margin-bottom: 10px; */
+}
+
+.user-profile-btn {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
