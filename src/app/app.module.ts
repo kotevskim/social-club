@@ -1,3 +1,4 @@
+import { AuthenticationGuard } from './services/authentication.guard';
 import {UserModule} from './user/user.module';
 import {AppRoutingModule} from './app-routing.module';
 import {NgModule} from '@angular/core';
@@ -38,6 +39,7 @@ import {EditDialogComponent} from './edit-dialog/edit-dialog.component';
   providers: [
     AngularFireAuth,
     AngularFireDatabase,
+    AuthenticationGuard
   ],
   bootstrap: [AppComponent]
 })

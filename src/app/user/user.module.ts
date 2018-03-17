@@ -7,6 +7,8 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
+import { UserFriendsComponent } from './user-friends/user-friends.component';
+import { FriendsService } from '../services/friends.service';
 
 @NgModule({
   imports: [
@@ -17,8 +19,12 @@ import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
   ],
   declarations: [
     UserProfileComponent,
-    EditDialogComponent
+    EditDialogComponent,
+    UserFriendsComponent
   ],
-  providers: [AuthenticationGuard]
+  providers: [
+    AuthenticationGuard,
+    FriendsService
+  ]
 })
 export class UserModule {}

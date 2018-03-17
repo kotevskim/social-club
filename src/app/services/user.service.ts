@@ -23,7 +23,7 @@ export class UserService {
    * @param {AngularFireDatabase} fireDb provides the functionality for
    * Firebase Database
    */
-  constructor(private fireDb: AngularFireDatabase) { }
+  constructor(private fireDb: AngularFireDatabase) {}
 
   public addUser(user: User): void {
     this.fireDb.object(`${USERS_CHILD}/${user.uid}`).set(user);
