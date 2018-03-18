@@ -16,6 +16,7 @@ import { User } from '../shared/user';
 export class UserProfileComponent implements OnInit {
 
   user: User;
+  profileImage: any = '../../../assets/images/def_pp.png';
   @ViewChild(EditDialogComponent) editDialog: EditDialogComponent;
 
   constructor(
@@ -26,6 +27,13 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.userService.getSavedUser().getValue();
+    this.userService.getSavedUser().subscribe(
+      (user) => {
+          if (this.user.image !== null && this.user.image !== '' && this.user.image !== undefined) {
+              this.profileImage = this.user.image;
+          }
+      }
+  );
   }
 
   onLogout(): void {
@@ -64,6 +72,12 @@ export class UserProfileComponent implements OnInit {
       .setEditType(EditType.PASSWORD)
       .show();
   }
+
+  onPersonEdit(event) {
+    const selectedFiles: FileList = event.target.files;
+    const file = selectedFiles.item(0);
+    this.userService.addProfileImage(this.user, file);
+ }
 
   private nagivateToLogin() {
     this.router.navigateByUrl('/login');

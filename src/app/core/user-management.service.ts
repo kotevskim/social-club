@@ -1,4 +1,5 @@
-import { USERS_CHILD } from './database-constants';
+import { PROFILE } from './../constants/storage-constants';
+import { USERS_CHILD } from './../constants/database-constants';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
@@ -13,9 +14,13 @@ import { User } from '../user/shared/user';
 export class UserManagementService {
 
   // We use the subject to store the user model.
+  // This is acache user object.
   // The subject will be populated with the latest user model.
   // This approach is used to pass the user between components.
   private subject: BehaviorSubject<User> = new BehaviorSubject(null);
+
+  private fbStorage: any;
+  private basePath = PROFILE;
 
   /**
    * Constructor
@@ -23,7 +28,9 @@ export class UserManagementService {
    * @param {AngularFireDatabase} fireDb provides the functionality for
    * Firebase Database
    */
-  constructor(private fireDb: AngularFireDatabase) {}
+  constructor(private fireDb: AngularFireDatabase) {
+    this.fbStorage = fireDb.app.storage();
+  }
 
   public addUser(user: User): void {
     this.fireDb.object(`${USERS_CHILD}/${user.uid}`).set(user);
@@ -60,5 +67,19 @@ export class UserManagementService {
     this.fireDb.object(`${USERS_CHILD}/${user.uid}`).update({name: newName});
     this.saveUser(user);
   }
+
+  public addProfileImage(user: User, file: File) {
+    this.fbStorage.ref(`${this.basePath}/${file.name}`).put(file).then(
+        snapshot => {
+            const imageUrl: string = snapshot.downloadURL;
+            this.fireDb.object(`${USERS_CHILD}/${user.uid}`).update({image: imageUrl});
+            user.image = imageUrl;
+            // refresh the cache user object
+            this.saveUser(user);
+        }).catch((error) => {
+        const errorMessage = error.message;
+        alert(errorMessage);
+    });
+}
 
 }

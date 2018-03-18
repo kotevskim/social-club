@@ -1,11 +1,13 @@
 <div class="row">
   <div class="col-md-3"></div>
 <div class="col-12 col-md-6 user-profile box-shadow">
-  <div class="person-icon">
-      <!-- <img [src]="profileImage" style="max-width: 100%; max-height: 100%;"> -->
-      <!-- <fa name="cog" animation="spin"></fa> -->
-      <!-- <i class="fa fa-user"></i> -->
+
+  <br>
+  <div class="div-profile-picture">
+    <img [src]="profileImage">
+    <input class="inputfile" (change)="onPersonEdit($event)" required accept="image/*" type="file"/>
   </div>
+  <br>
 
   <div class="user-profile-info-row">
     <div class="row">
@@ -63,10 +65,7 @@
         <span class="user-profile-info-row-value">*****</span>
       </div>
 
-
-
-
-  <div class="user-profile-btn clearfix">
+  <div class="bottom-section clearfix">
       <button type="button" (click)='onLogout()' class="btn btn-danger pull-right">Logout</button>
   </div>
 </div>

@@ -1,6 +1,6 @@
-import { AuthenticationService } from '../../services/authentication.service';
-import { UserService } from '../../services/user.service';
-import { User } from '../../models/user';
+import { AuthenticationService } from '../../authentication/shared/authentication.service';
+import { UserManagementService } from '../../core/user-management.service';
+import { User } from '../../user/shared/user';
 
 export enum EditType {
     NAME,
@@ -12,7 +12,7 @@ export enum EditType {
 export class EditDetails {
 
     constructor(private authService: AuthenticationService,
-                private userService: UserService) {
+                private userService: UserManagementService) {
     }
 
     public edit(editType: EditType, value: string) {
