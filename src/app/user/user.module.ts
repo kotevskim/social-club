@@ -1,29 +1,24 @@
 import { FormsModule } from '@angular/forms';
-import { AuthenticationGuard } from './../services/authentication.guard';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UserRoutingModule } from './user-routing.module';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { EditDialogComponent } from '../edit-dialog/edit-dialog.component';
 import { UserFriendsComponent } from './user-friends/user-friends.component';
-import { FriendsService } from '../services/friends.service';
+import { SharedModule } from '../shared/shared.module';
+import { FriendsService } from './shared/friends.service';
+
 
 @NgModule({
   imports: [
-    CommonModule,
     UserRoutingModule,
-    AngularFontAwesomeModule,
-    FormsModule
+    SharedModule.forRoot()
   ],
   declarations: [
     UserProfileComponent,
-    EditDialogComponent,
-    UserFriendsComponent
+    UserFriendsComponent,
   ],
   providers: [
-    AuthenticationGuard,
     FriendsService
   ]
 })

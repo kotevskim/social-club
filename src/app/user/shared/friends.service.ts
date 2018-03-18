@@ -1,8 +1,8 @@
-import { USER_DETAILS_CHILD, FRIENDS_CHILD } from './database-constants';
-import { Friend } from './../models/friend';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
+import { Friend } from './friend';
+import { USER_DETAILS_CHILD, FRIENDS_CHILD } from '../../core/database-constants';
 
 @Injectable()
 export class FriendsService {

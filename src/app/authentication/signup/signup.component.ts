@@ -1,8 +1,7 @@
-import { UserService } from './../../services/user.service';
+import { UserManagementService } from './../../core/user-management.service';
 import { Component } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
-import { User } from '../../models/user';
-
+import { AuthenticationService } from '../shared/authentication.service';
+import { User } from '../../user/shared/user';
 
 @Component({
   selector: 'app-signup',
@@ -16,7 +15,7 @@ export class SignupComponent {
 
   constructor(
     private authService: AuthenticationService,
-    private userService: UserService
+    private userService: UserManagementService
   ) {}
 
   onSignup(signupFormData): void {

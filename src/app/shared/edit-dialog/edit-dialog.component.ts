@@ -1,7 +1,7 @@
 import { EditType, EditDetails } from './edit-details';
-import { UserService } from './../services/user.service';
-import { AuthenticationService } from './../services/authentication.service';
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from '../../authentication/shared/authentication.service';
+import { UserManagementService } from '../../core/user-management.service';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -19,7 +19,7 @@ export class EditDialogComponent {
 
   constructor(
     private authService: AuthenticationService,
-    private userService: UserService
+    private userService: UserManagementService
   ) {
     this.editDetails = new EditDetails(authService, userService);
   }

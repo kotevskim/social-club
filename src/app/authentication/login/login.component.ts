@@ -1,9 +1,11 @@
 import { AngularFireAuth } from 'angularfire2/auth';
-import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
-import { User } from '../../models/user';
+import { User } from '../../user/shared/user';
+import { AuthenticationService } from '../shared/authentication.service';
+import { UserManagementService } from '../../core/user-management.service';
+
+
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,7 @@ export class LoginComponent {
 
   constructor(
     private authService: AuthenticationService,
-    private userService: UserService,
+    private userService: UserManagementService,
     private angularFireAuth: AngularFireAuth,
     private router: Router
   ) {

@@ -1,16 +1,16 @@
 import { USERS_CHILD } from './database-constants';
-import { User } from './../models/user';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { User } from '../user/shared/user';
 
 /**
  * User service
  *
  */
 @Injectable()
-export class UserService {
+export class UserManagementService {
 
   // We use the subject to store the user model.
   // The subject will be populated with the latest user model.

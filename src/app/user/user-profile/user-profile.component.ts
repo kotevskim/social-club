@@ -1,10 +1,12 @@
-import { EditDialogComponent } from './../../edit-dialog/edit-dialog.component';
-import { UserService } from './../../services/user.service';
-import { AuthenticationService } from './../../services/authentication.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../../models/user';
-import { EditType } from '../../edit-dialog/edit-details';
+import { EditDialogComponent } from '../../shared/edit-dialog/edit-dialog.component';
+import { UserManagementService } from '../../core/user-management.service';
+import { AuthenticationService } from '../../authentication/shared/authentication.service';
+import { EditType } from '../../shared/edit-dialog/edit-details';
+import { User } from '../shared/user';
+
+
 
 @Component({
   selector: 'app-user-profile',
@@ -17,7 +19,7 @@ export class UserProfileComponent implements OnInit {
   @ViewChild(EditDialogComponent) editDialog: EditDialogComponent;
 
   constructor(
-    private userService: UserService,
+    private userService: UserManagementService,
     private authService: AuthenticationService,
     private router: Router
   ) {}

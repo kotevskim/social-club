@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {FriendsService} from '../../services/friends.service';
-
-import {UserService} from '../../services/user.service';
 
 import 'firebase/storage';
-import { Friend } from '../../models/friend';
-import { User } from '../../models/user';
+import { Friend } from '../shared/friend';
+import { FriendsService } from '../shared/friends.service';
+import { UserManagementService } from '../../core/user-management.service';
+import { User } from '../shared/user';
 
 @Component({
     selector: 'app-friends-userfriends',
@@ -24,7 +23,7 @@ export class UserFriendsComponent implements OnInit {
     user: User;
 
     constructor(private friendService: FriendsService,
-                private userService: UserService) {
+                private userService: UserManagementService) {
     }
 
     ngOnInit() {
