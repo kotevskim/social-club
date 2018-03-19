@@ -1,10 +1,11 @@
+import {Router} from '@angular/router';
 import {Component, OnInit} from '@angular/core';
 
 import 'firebase/storage';
-import { Friend } from '../shared/friend';
-import { FriendsService } from '../shared/friends.service';
-import { UserManagementService } from '../../core/user-management.service';
-import { User } from '../shared/user';
+import {Friend} from '../shared/friend';
+import {FriendsService} from '../shared/friends.service';
+import {UserManagementService} from '../../core/user-management.service';
+import {User} from '../shared/user';
 
 @Component({
     selector: 'app-friends-userfriends',
@@ -22,9 +23,11 @@ export class UserFriendsComponent implements OnInit {
     isRightVisible = true;
     user: User;
 
-    constructor(private friendService: FriendsService,
-                private userService: UserManagementService) {
-    }
+    constructor(
+      private friendService: FriendsService,
+      private userService: UserManagementService,
+      private router: Router
+    ) {}
 
     ngOnInit() {
         this.user = this.userService.getSavedUser().getValue();
@@ -85,5 +88,9 @@ export class UserFriendsComponent implements OnInit {
     rightArrowVisible(): void {
         this.isRightVisible = this.totalCount > this.currentCount;
     }
+
+    onChat(id: string): void {
+      this.router.navigate(['/chat' , id]);
+  }
 
 }

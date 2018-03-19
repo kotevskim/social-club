@@ -1,0 +1,22 @@
+@import "../../../assets/_colors.scss";
+
+.chat-message-form-main-container {
+
+  width: 500px;
+
+  .chat-message-form-container {
+      padding: 12px;
+      padding-bottom: 10px;
+
+      .add-on {
+        display: inline-block;
+        padding-right: 8px;
+      }
+
+      .message-text {
+        background-color: lightyellow;
+      }
+  }
+
+
+}

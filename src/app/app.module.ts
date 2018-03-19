@@ -1,3 +1,4 @@
+import { ChatModule } from './chat/chat.module';
 import { CoreModule } from './core/core.module';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
@@ -26,7 +27,8 @@ import { AboutComponent } from './static/about/about.component';
     AuthenticationModule,
     UserModule,
     SharedModule.forRoot(),
-    CoreModule
+    CoreModule,
+    ChatModule
   ],
   declarations: [
     AppComponent,

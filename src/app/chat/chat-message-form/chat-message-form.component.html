@@ -1,0 +1,24 @@
+<div class="chat-message-form-main-container">
+    <div class="chat-message-form-container bg-warning">
+
+      <!-- <div class="row"> -->
+        <span class="add-on"><fa name="camera" size="lg"></fa></span>
+        <span class="add-on"><fa name="image" size="lg"></fa></span>
+        <span class="add-on"><fa name="paperclip" size="lg"></fa></span>
+        <span class="add-on"><fa name="microphone" size="lg"></fa></span>
+      <!-- </div> -->
+
+
+
+      <div class="input-group" style="margin-top: 8px;">
+        <input type="textarea" class="form-control message-text" placeholder="Type a message"
+        [(ngModel)]="newMessage" (keyup.enter)="sendMessage()">
+        <span class="input-group-btn">
+          <button class="btn btn-danger" type="button" (click)="sendMessage()">
+              <fa name="send" size="1x"></fa>
+          </button>
+        </span>
+      </div>
+
+    </div>
+</div>

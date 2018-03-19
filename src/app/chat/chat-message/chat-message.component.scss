@@ -1,0 +1,29 @@
+@import "../../../assets/_shared.scss";
+
+.chat-message-main-container {
+
+  .message-bubble {
+    display: inline-block;
+    border-radius: 5px;
+    box-shadow: 0 0 6px #B2B2B2;
+    padding: 10px 18px;
+
+  }
+
+  .receiver {
+    background-color: #ffffff;
+    float: right;
+    margin-right: 5px;
+  }
+
+  .sender {
+    background-color: #fff093;
+    margin-left: 5px;
+
+  }
+
+  .timestamp {
+    color:gray;
+  }
+
+}
