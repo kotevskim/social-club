@@ -31,15 +31,24 @@ export class UserFriendsComponent implements OnInit {
 
     ngOnInit() {
         this.user = this.userService.getSavedUser().getValue();
-        this.totalCount = this.user.friendcount;
-        this.friendService.loadFirstPage(this.user.uid, this.pageSize)
+        if (this.friendService.isFriendsCacheEmpty()) {
+          // this.totalCount = this.user.friendcount;
+          // this.friendService.loadFirstPage(this.user.uid, this.pageSize)
+          //     .subscribe(friends => {
+          //         this.friends = friends;
+          //         const count: number = this.friends.length;
+          //         this.currentCount = count;
+          //         this.leftArrowVisible();
+          //         this.rightArrowVisible();
+          //     });
+          this.friendService.getAllFriends(this.user.uid)
             .subscribe(friends => {
-                this.friends = friends;
-                const count: number = this.friends.length;
-                this.currentCount = count;
-                this.leftArrowVisible();
-                this.rightArrowVisible();
+              this.friends = friends;
+              this.friendService.cacheFriends(friends);
             });
+        } else {
+          this.friends = this.friendService.getCachedFriends().getValue();
+        }
     }
 
     onLeft(): void {

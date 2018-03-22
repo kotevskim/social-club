@@ -1,3 +1,4 @@
+import { FriendsService } from './../shared/friends.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { EditDialogComponent } from '../../shared/edit-dialog/edit-dialog.component';
@@ -21,6 +22,7 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     private userService: UserManagementService,
+    private friendsService: FriendsService,
     private authService: AuthenticationService,
     private router: Router
   ) {}
@@ -33,11 +35,14 @@ export class UserProfileComponent implements OnInit {
               this.profileImage = this.user.image;
           }
       }
-  );
+    );
   }
 
   onLogout(): void {
-    this.authService.signout().then(() => this.nagivateToLogin());
+    this.authService.signout().then(() => {
+      this.friendsService.clearFriendsCache();
+      this.nagivateToLogin();
+    });
   }
 
   onNameEditClick() {

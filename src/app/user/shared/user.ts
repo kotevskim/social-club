@@ -12,12 +12,12 @@ export class User {
 
   image: string;
 
-  constructor(email: string,
+  constructor(email: string = '',
               name: string,
-              mobile: string,
+              mobile: string = '',
               uid: string,
-              friendcount: number,
-              image: string) {
+              friendcount: number = 0,
+              image: string = '') {
       this.email = email;
       this.name = name;
       this.mobile = mobile;
@@ -25,4 +25,5 @@ export class User {
       this.friendcount = friendcount;
       this.image = image;
   }
+
 }
