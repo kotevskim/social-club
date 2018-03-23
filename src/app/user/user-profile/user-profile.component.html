@@ -1,46 +1,24 @@
-<div class="row">
-  <div class="col-md-3"></div>
-<div class="col-12 col-md-6 user-profile box-shadow">
+<div class="container">
 
-  <br>
-  <div class="div-profile-picture">
-    <img [src]="profileImage">
-    <input class="inputfile" (change)="onPersonEdit($event)" required accept="image/*" type="file"/>
-  </div>
-  <br>
+<!-- <div class="col-12 col-md-12 user-profile box-shadow"> -->
 
-  <div class="user-profile-info-row">
-    <div class="row">
-      <label class="col-10 user-profile-info-row-label">Name: </label>
-      <button (click)="onNameEditClick()"
-              data-toggle="modal"
-              data-target="#editModal"
-              type="button"
-              class="col-2 btn btn-link">
-        <fa name="edit"></fa>
-      </button>
+  <div class="row user-profile">
+
+  <div class="col-12 col-md-3">
+    <div class="div-profile-picture text-center">
+      <img [src]="profileImage" class="rounded-circle img-fluid">
+      <input class="inputfile" (change)="onPersonEdit($event)" required accept="image/*" type="file"/>
     </div>
-    <span class="user-profile-info-row-value">{{user?.name}}</span>
   </div>
 
-  <div class="user-profile-info-row">
-    <div class="row">
-      <label class="col-10 user-profile-info-row-label">Email: </label>
-      <button (click)="onEmailEditClick()"
-              data-toggle="modal"
-              data-target="#editModal"
-              type="button"
-              class="col-2 btn btn-link">
-        <fa name="edit"></fa>
-      </button>
-    </div>
-    <span class="user-profile-info-row-value">{{user?.email}}</span>
-  </div>
+
+
+  <div class="col-12 col-md-9">
 
     <div class="user-profile-info-row">
       <div class="row">
-        <label class="col-10 user-profile-info-row-label">Mobile: </label>
-        <button (click)="onMobileEditClick()"
+        <label class="col-10 user-profile-info-row-label">Name: </label>
+        <button (click)="onNameEditClick()"
                 data-toggle="modal"
                 data-target="#editModal"
                 type="button"
@@ -48,13 +26,27 @@
           <fa name="edit"></fa>
         </button>
       </div>
-      <span class="user-profile-info-row-value">{{user?.mobile}}</span>
+      <span class="user-profile-info-row-value">{{currentUser?.name}}</span>
     </div>
 
     <div class="user-profile-info-row">
+      <div class="row">
+        <label class="col-10 user-profile-info-row-label">Email: </label>
+        <button (click)="onEmailEditClick()"
+                data-toggle="modal"
+                data-target="#editModal"
+                type="button"
+                class="col-2 btn btn-link">
+          <fa name="edit"></fa>
+        </button>
+      </div>
+      <span class="user-profile-info-row-value">{{currentUser?.email}}</span>
+    </div>
+
+      <div class="user-profile-info-row">
         <div class="row">
-          <label class="col-10 user-profile-info-row-label">Password: </label>
-          <button (click)="onPasswordEditClick()"
+          <label class="col-10 user-profile-info-row-label">Mobile: </label>
+          <button (click)="onMobileEditClick()"
                   data-toggle="modal"
                   data-target="#editModal"
                   type="button"
@@ -62,12 +54,33 @@
             <fa name="edit"></fa>
           </button>
         </div>
-        <span class="user-profile-info-row-value">*****</span>
+        <span class="user-profile-info-row-value">{{currentUser?.mobile}}</span>
       </div>
 
-  <div class="bottom-section clearfix">
-      <button type="button" (click)='onLogout()' class="btn btn-danger pull-right">Logout</button>
+      <div class="user-profile-info-row">
+          <div class="row">
+            <label class="col-10 user-profile-info-row-label">Password: </label>
+            <button (click)="onPasswordEditClick()"
+                    data-toggle="modal"
+                    data-target="#editModal"
+                    type="button"
+                    class="col-2 btn btn-link">
+              <fa name="edit"></fa>
+            </button>
+          </div>
+          <span class="user-profile-info-row-value">*****</span>
+        </div>
+
+        <div class="bottom-section clearfix">
+          <button type="button" (click)='onLogout()' class="btn btn-danger pull-right">Logout</button>
+      </div>
+
   </div>
 </div>
+
+
+
+
 </div>
+<!-- </div> -->
 <app-edit-dialog></app-edit-dialog>

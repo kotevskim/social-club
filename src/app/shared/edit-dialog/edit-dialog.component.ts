@@ -1,7 +1,7 @@
 import { EditType, EditDetails } from './edit-details';
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../../authentication/shared/authentication.service';
 import { UserManagementService } from '../../core/user-management.service';
+import { AuthenticationService } from '../../core/authentication.service';
 
 @Component({
   selector: 'app-edit-dialog',

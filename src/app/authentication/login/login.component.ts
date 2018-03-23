@@ -2,8 +2,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../user/shared/user';
-import { AuthenticationService } from '../shared/authentication.service';
 import { UserManagementService } from '../../core/user-management.service';
+import { AuthenticationService } from '../../core/authentication.service';
 
 
 
@@ -24,19 +24,25 @@ export class LoginComponent {
     private angularFireAuth: AngularFireAuth,
     private router: Router
   ) {
+    // WHY THIS DOWSNT WORK??????!!!
+    // this.authService.isAuthenticated().subscribe(
+    //   authenticated => {
+    //     if (authenticated) {
+    //       this.nagivateToUserPeofile();
+    //     }
+    // });
     this.angularFireAuth.auth.onAuthStateChanged(user => {
       if (user) {
-        this.getUserInfo(user.uid);
+        this.cacheUserAndRedirect(user.uid);
       }
     });
   }
 
   onLogin(loginFormData): void {
     this.authService.login(loginFormData.value.email, loginFormData.value.password)
-      .then(userInfo => {
-        // Logged in user
-        const uid: string = userInfo.uid;
-        this.getUserInfo(uid);
+      .then(userInfo => { // User is logged in
+        this.cacheUserAndRedirect(userInfo.uid);
+        this.authService.isUserLoggedIn = true;
       }).catch(error => {
         this.showError = true;
         this.errorMessage = error.message;
@@ -52,18 +58,19 @@ export class LoginComponent {
     });
   }
 
-  private getUserInfo(uid: string): void {
+  private cacheUserAndRedirect(uid: string): void {
     this.userService.getUser(uid).subscribe(snapshot => {
-      this.activeUser = snapshot;
-      this.userService.saveUser(this.activeUser);
-      this.nagivateToUserPeofile();
+      this.userService.cacheCurrentUser(snapshot);
+      this.userService.getCurrentUserFromCache().subscribe(
+        user => {
+          this.activeUser = user;
+          this.nagivateToUserPeofile();
+      });
     });
 
   }
 
   private nagivateToUserPeofile() {
-    this.router.navigateByUrl('/user-profile');
+    this.router.navigateByUrl('/me/info');
   }
-
-
 }

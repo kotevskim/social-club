@@ -1,30 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { SharedModule } from '../shared/shared.module';
-import { AuthenticationService } from './shared/authentication.service';
-import { AuthenticationGuard } from './shared/authentication.guard';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AuthenticationRoutingModule } from './authentication-routing.module';
 
 
 @NgModule({
   imports: [
-    AuthenticationRoutingModule,
     FormsModule,
-    SharedModule.forRoot()
+    SharedModule.forRoot(),
+    AuthenticationRoutingModule,
   ],
   declarations: [
     SignupComponent,
-    LoginComponent
-  ],
-  providers: [
-    AuthenticationService,
-    AuthenticationGuard,
-    AngularFireAuth,
+    LoginComponent,
   ]
 })
 export class AuthenticationModule { }

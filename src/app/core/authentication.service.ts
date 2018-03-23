@@ -11,13 +11,16 @@ import { User } from '@firebase/auth-types';
 @Injectable()
 export class AuthenticationService {
 
+  currentUser: User = null;
+  public isUserLoggedIn = false;
+
   /**
    * Constructor
    *
    * @param {AngularFireAuth} angularFireAuth provides the
      functionality related to authentication
    */
-  constructor(private angularFireAuth: AngularFireAuth) { }
+  constructor(private angularFireAuth: AngularFireAuth) {}
 
   public signup(email: string, password: string): Promise<any> {
     return this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password);
@@ -31,9 +34,23 @@ export class AuthenticationService {
     return this.angularFireAuth.auth.sendPasswordResetEmail(email);
   }
 
-  // THE RESULT IS NOT AVAILABLE IMMEDIATELY, READ ONLINE!!!!
-  public isAuthenticated(): boolean {
-    return this.angularFireAuth.auth.currentUser ? true : false;
+  public isAuthenticated(): Observable<boolean> {
+    return this.angularFireAuth.authState.map(auth => {
+      if (auth == null) {
+        return false;
+      } else {
+        this.currentUser = this.angularFireAuth.auth.currentUser;
+        this.isUserLoggedIn = true;
+        return true;
+      }
+    });
+  }
+
+  public getCurrentUser(): User {
+    if (this.currentUser == null) {
+      throw new Error('No currently active user, check if he is authenticated first');
+    }
+    return this.currentUser;
   }
 
   public signout(): Promise<any> {

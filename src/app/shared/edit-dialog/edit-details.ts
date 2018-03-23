@@ -1,5 +1,5 @@
-import { AuthenticationService } from '../../authentication/shared/authentication.service';
 import { UserManagementService } from '../../core/user-management.service';
+import { AuthenticationService } from '../../core/authentication.service';
 import { User } from '../../user/shared/user';
 
 export enum EditType {
@@ -36,7 +36,7 @@ export class EditDetails {
     }
 
     private editName(name: string) {
-        const user: User = this.userService.getSavedUser().getValue();
+        const user: User = this.userService.getCurrentUserFromCache().getValue();
         user.name = name;
         this.userService.updateName(user, name);
         alert('Name changed successfully');
@@ -46,7 +46,7 @@ export class EditDetails {
     // so we will need to update it in both places
     private editEmail(newEmail: string) {
         this.authService.changeEmail(newEmail).then(() => {
-            const user: User = this.userService.getSavedUser().getValue();
+            const user: User = this.userService.getCurrentUserFromCache().getValue();
             user.email = newEmail;
             this.userService.updateEmail(user, newEmail); // update in DB
             alert('Email changed successfully');
@@ -57,7 +57,7 @@ export class EditDetails {
     }
 
     private editMobile(mobile: string) {
-        const user: User = this.userService.getSavedUser().getValue();
+        const user: User = this.userService.getCurrentUserFromCache().getValue();
         user.mobile = mobile;
         this.userService.updateMobile(user, mobile);
         alert('Mobile changed successfully');

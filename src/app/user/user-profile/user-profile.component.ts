@@ -3,9 +3,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { EditDialogComponent } from '../../shared/edit-dialog/edit-dialog.component';
 import { UserManagementService } from '../../core/user-management.service';
-import { AuthenticationService } from '../../authentication/shared/authentication.service';
+
 import { EditType } from '../../shared/edit-dialog/edit-details';
 import { User } from '../shared/user';
+import { AuthenticationService } from '../../core/authentication.service';
+import { User as AuthUser } from '@firebase/auth-types';
 
 
 
@@ -16,7 +18,7 @@ import { User } from '../shared/user';
 })
 export class UserProfileComponent implements OnInit {
 
-  user: User;
+  currentUser: User;
   profileImage: any = '../../../assets/images/def_pp.png';
   @ViewChild(EditDialogComponent) editDialog: EditDialogComponent;
 
@@ -28,19 +30,51 @@ export class UserProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.user = this.userService.getSavedUser().getValue();
-    this.userService.getSavedUser().subscribe(
-      (user) => {
-          if (this.user.image !== null && this.user.image !== '' && this.user.image !== undefined) {
-              this.profileImage = this.user.image;
+
+    // If the guard on this route passes, that means there is an active user
+      // and we can get it with the getCurrentUser() method of the
+      // AuthenticationService.
+      // The method returns object of type User, from the
+      // '@firebase/auth-types' module.
+
+      // If there is no cached user that means that the page has been refreshed,
+      // because there must be an active user (because of the guard).
+      if (this.userService.isCurrentUserCached()) {
+        this.userService.getCurrentUserFromCache().subscribe(
+          user => {
+            console.log('DEBUG ::: Current user loaded from cache');
+            this.currentUser = user;
+            this.applyUserProfilePictureIfExists();
           }
-      }
-    );
+        );
+      } else {
+         // the page has been refreshed (there is an active user)
+         const authUser: AuthUser = this.authService.getCurrentUser();
+         this.userService.getUser(authUser.uid).subscribe(
+           snapshot => {
+            console.log('DEBUG ::: Current user loaded from fireDb');
+            this.userService.cacheCurrentUser(snapshot);
+            this.userService.getCurrentUserFromCache()
+             .subscribe(
+                user => {
+                  this.currentUser = user;
+                  this.applyUserProfilePictureIfExists();
+                }
+              );
+          });
+        }
+  }
+
+  private applyUserProfilePictureIfExists() {
+    if (this.currentUser.image !== null && this.currentUser.image !== '' && this.currentUser.image !== undefined) {
+      this.profileImage = this.currentUser.image;
+    }
   }
 
   onLogout(): void {
     this.authService.signout().then(() => {
-      this.friendsService.clearFriendsCache();
+      this.friendsService.clearFriendListFromCache();
+      this.authService.isUserLoggedIn = false;
       this.nagivateToLogin();
     });
   }
@@ -81,11 +115,11 @@ export class UserProfileComponent implements OnInit {
   onPersonEdit(event) {
     const selectedFiles: FileList = event.target.files;
     const file = selectedFiles.item(0);
-    this.userService.addProfileImage(this.user, file);
+    this.userService.addProfileImage(this.currentUser, file);
  }
 
   private nagivateToLogin() {
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/who-are-you/login');
   }
 
 }

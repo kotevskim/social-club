@@ -13,7 +13,7 @@ export class ChatMessageListComponent implements OnInit, AfterViewChecked {
 
   @Input() friendUid: string;
   chatId: string;
-  private user: User;
+  private activeUser: User;
   messages: Message[];
   @ViewChild('scrollContainer') private scrollContainer: ElementRef;
 
@@ -24,11 +24,11 @@ export class ChatMessageListComponent implements OnInit, AfterViewChecked {
   ) { }
 
   ngOnInit() {
-    this.user = this.userManagementService.getSavedUser().getValue();
-    this.messageService.isChatCreated(this.user.uid, this.friendUid).subscribe(snapshot => {
+    this.activeUser = this.userManagementService.getCurrentUserFromCache().getValue();
+    this.messageService.isChatCreated(this.activeUser.uid, this.friendUid).subscribe(snapshot => {
         if (snapshot == null) {
             console.log('Chat has not been created');
-            this.chatId = this.messageService.freshlyCreateChatIDEntry(this.user.uid, this.friendUid);
+            this.chatId = this.messageService.freshlyCreateChatIDEntry(this.activeUser.uid, this.friendUid);
         } else {
             this.chatId = snapshot.key;
         }

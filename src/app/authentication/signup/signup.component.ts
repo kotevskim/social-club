@@ -1,7 +1,7 @@
 import { UserManagementService } from './../../core/user-management.service';
 import { Component } from '@angular/core';
-import { AuthenticationService } from '../shared/authentication.service';
 import { User } from '../../user/shared/user';
+import { AuthenticationService } from '../../core/authentication.service';
 
 @Component({
   selector: 'app-signup',

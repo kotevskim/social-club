@@ -2,6 +2,7 @@ import { MessagingService } from './../shared/messaging.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { UserManagementService } from '../../core/user-management.service';
 import { Message } from '../shared/message';
+import { User } from '../../user/shared/user';
 
 @Component({
   selector: 'app-chat-message-form',
@@ -20,7 +21,8 @@ export class ChatMessageFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.uid = this.userService.getSavedUser().getValue().uid;
+    const activeUser: User = this.userService.getCurrentUserFromCache().getValue();
+    this.uid = activeUser.uid;
   }
 
   sendMessage() {

@@ -1,5 +1,9 @@
+import { FriendsService } from './user/shared/friends.service';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Component } from '@angular/core';
-import { AuthenticationService } from './authentication/shared/authentication.service';
+import { AuthenticationService } from './core/authentication.service';
+
 
 @Component({
   selector: 'app-root',
@@ -8,9 +12,22 @@ import { AuthenticationService } from './authentication/shared/authentication.se
 })
 export class AppComponent {
   title = 'app';
-  authenticationService: AuthenticationService;
 
-  constructor(private authService: AuthenticationService) {
-    this.authenticationService = authService;
+  constructor(
+    public authService: AuthenticationService,
+    private router: Router,
+    private friendService: FriendsService
+  ) {}
+
+  onLogout(): void {
+    this.authService.signout().then(() => {
+      this.friendService.clearFriendListFromCache();
+      this.authService.isUserLoggedIn = false;
+      this.nagivateToLogin();
+    });
+  }
+
+  private nagivateToLogin() {
+    this.router.navigateByUrl('/who-are-you/login');
   }
 }

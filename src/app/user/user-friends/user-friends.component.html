@@ -17,7 +17,7 @@
                 </button>
 
                 <div class="card-footer">
-                    <small class="text-muted">Friends from {{friend.time | myDateTime}}</small>
+                    <small class="text-muted">Friends from {{friend.time | date:"MM/dd/yy" }}</small>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
             <fa name="caret-right" size="2x"></fa>
         </div>
     </div>
-    <div *ngIf="!friends || friends.length === 0" class="no_info_container">
+    <div *ngIf="friends == null || friends.length === 0" class="no_info_container">
         <h1>No friends in your list</h1>
     </div>
 </div>

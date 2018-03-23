@@ -22,13 +22,13 @@ import { AboutComponent } from './static/about/about.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AuthenticationModule,
-    UserModule,
+    // AuthenticationModule,
+    UserModule, // ??? what if imported
     SharedModule.forRoot(),
     CoreModule,
-    ChatModule
+    // ChatModule
+    AppRoutingModule,
   ],
   declarations: [
     AppComponent,

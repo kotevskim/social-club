@@ -1,3 +1,4 @@
+import { CoreModule } from './../core/core.module';
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -12,6 +13,7 @@ import { MessagingService } from './shared/messaging.service';
 @NgModule({
   imports: [
     ChatRoutingModule,
+    // CoreModule,
     SharedModule.forRoot()
   ],
   declarations: [

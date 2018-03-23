@@ -39,20 +39,35 @@ export class FriendsService {
       .valueChanges();
   }
 
-  public cacheFriends(friends: Friend[]) {
+  public cacheFriendList(friends: Friend[]) {
     this.friendsSubject.next(friends);
   }
 
-  public isFriendsCacheEmpty() {
-    return this.friendsSubject.getValue() == null;
+  public isFriendListCached() {
+    return this.friendsSubject.getValue() !== null;
   }
 
-  public getCachedFriends(): BehaviorSubject<Friend[]> {
+  public getFriendsFromCache(): BehaviorSubject<Friend[]> {
     return this.friendsSubject;
   }
 
-  public clearFriendsCache() {
+  public clearFriendListFromCache() {
     this.friendsSubject = new BehaviorSubject(null);
   }
+
+  // public getFriendList(uid: string): BehaviorSubject<Friend[]> {
+  //   if (this.isFriendListCached()) {
+  //     return this.getFriendsFromCache();
+  //   } else {
+  //     this.getAllFriends(uid)
+  //       .subscribe(friends => {
+
+  //         this.cacheFriendList(friends);
+  //         console.log('od metod'+this.getFriendsFromCache());
+  //         return this.getFriendsFromCache();
+  //       });
+  //   }
+  // }
+
 
 }

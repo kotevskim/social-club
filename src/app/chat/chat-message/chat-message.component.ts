@@ -17,7 +17,7 @@ export class ChatMessageComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.uid = this.userService.getSavedUser().getValue().uid;
+    this.uid = this.userService.getCurrentUserFromCache().getValue().uid;
   }
 
   isReceiver(message: Message) {

@@ -29,7 +29,7 @@ export class UserManagementService {
    * Firebase Database
    */
   constructor(private fireDb: AngularFireDatabase) {
-    this.fbStorage = fireDb.app.storage();
+    this.fbStorage = fireDb.app.storage;
   }
 
   public addUser(user: User): void {
@@ -43,29 +43,34 @@ export class UserManagementService {
   /*
   * Save the user model in subject.
   */
-  public saveUser(user: User) {
+  public cacheCurrentUser(user: User) {
+    console.log('DEBUG ::: Current user cached');
     this.subject.next(user);
   }
 
   // To retrieve the value from the subject use the getValue() method.
   // You can also subscribe and retrieve the user model.
-  public getSavedUser(): BehaviorSubject<User> {
+  public getCurrentUserFromCache(): BehaviorSubject<User> {
     return this.subject;
+  }
+
+  public isCurrentUserCached(): boolean {
+    return this.subject.getValue() !== null;
   }
 
   public updateEmail(user: User, newEmail: string): void {
     this.fireDb.object(`${USERS_CHILD}/${user.uid}`).update({email: newEmail});
-    this.saveUser(user);
+    this.cacheCurrentUser(user);
   }
 
   public updateMobile(user: User, newMobile: string): void {
     this.fireDb.object(`${USERS_CHILD}/${user.uid}`).update({mobile: newMobile});
-    this.saveUser(user);
+    this.cacheCurrentUser(user);
   }
 
   public updateName(user: User, newName: string): void {
     this.fireDb.object(`${USERS_CHILD}/${user.uid}`).update({name: newName});
-    this.saveUser(user);
+    this.cacheCurrentUser(user);
   }
 
   public addProfileImage(user: User, file: File) {
@@ -75,7 +80,7 @@ export class UserManagementService {
             this.fireDb.object(`${USERS_CHILD}/${user.uid}`).update({image: imageUrl});
             user.image = imageUrl;
             // refresh the cache user object
-            this.saveUser(user);
+            this.cacheCurrentUser(user);
         }).catch((error) => {
         const errorMessage = error.message;
         alert(errorMessage);
