@@ -12,7 +12,7 @@ import { User as AuthUser } from '@firebase/auth-types';
 
 @Component({
     selector: 'app-friends-userfriends',
-    styleUrls: ['user-friends.component.sass'],
+    styleUrls: ['user-friends.component.scss'],
     templateUrl: 'user-friends.component.html'
 })
 export class UserFriendsComponent implements OnInit {

@@ -1,0 +1,60 @@
+.main_container {
+
+  padding-top: 50px;
+
+  .card {
+    padding: 0 0 0 0;
+    border: 1px solid #2c2a2a;
+    border: 1px solid #dc3545;
+
+    .card-img {
+      width: 70%;
+      margin: 0 auto 10px auto;
+    }
+
+    .card-text {
+      display: block;
+      color: grey;
+    }
+
+    .card-title {
+      color: whitesmoke;
+      font-weight: bold;
+    }
+
+    .card-header {
+      background-color: hsl(207, 9%, 20%);
+      // border: 1px solid #dc3545;
+      border-bottom: none;
+    }
+
+    .card-body {
+      background-color: #343a40;
+      padding-top: 10px;
+
+
+    }
+
+    .card-footer {
+      background-color: hsl(207, 9%, 20%);
+      // border: 1px solid #dc3545;
+      border-top: none;
+    }
+
+  }
+
+  .card:hover {
+    box-shadow: 0 8px 8px 3px rgba(220, 53, 69, 0.2);
+  }
+
+
+
+
+
+
+
+
+
+}
+
+

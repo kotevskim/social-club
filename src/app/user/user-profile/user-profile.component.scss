@@ -10,7 +10,7 @@
 }
 
 .user-profile-info-row-label {
-  color: #626872;
+  color: #dc3545;
   font-size: small;
 }
 
@@ -29,7 +29,10 @@
   height: 100%;
   margin: 0 auto;
   position: relative;  /* to be able to stack the child elelemts on top of eachother */
-  /* vertical-align: middle; */
+
+  img {
+    border: 2px solid #dc3545;
+  }
 }
 
 .div-profile-picture:hover {
