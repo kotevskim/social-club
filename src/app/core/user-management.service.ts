@@ -85,6 +85,14 @@ export class UserManagementService {
         const errorMessage = error.message;
         alert(errorMessage);
     });
-}
+  }
+
+  public searchUsersByName(start, end): Observable<User[]> {
+    return this.fireDb.list<User>('/users',
+      ref => ref.orderByChild('name')
+        .limitToFirst(10)
+        .startAt(start).endAt(end)
+    ).valueChanges();
+  }
 
 }

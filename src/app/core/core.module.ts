@@ -1,3 +1,4 @@
+import { FriendsService } from './friends.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserManagementService } from './user-management.service';
@@ -11,6 +12,7 @@ import { AuthenticationGuard } from './authentication.guard';
     AuthenticationService,
     AuthenticationGuard,
     AngularFireAuth,
+    FriendsService
   ]
 })
 export class CoreModule { }

@@ -1,9 +1,11 @@
 import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
-import { Friend } from './friend';
-import { USER_DETAILS_CHILD, FRIENDS_CHILD } from '../../constants/database-constants';
+
+
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Friend } from '../user/shared/friend';
+import { USER_DETAILS_CHILD, FRIENDS_CHILD } from '../constants/database-constants';
 
 @Injectable()
 export class FriendsService {

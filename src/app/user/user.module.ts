@@ -6,7 +6,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserFriendsComponent } from './user-friends/user-friends.component';
 import { SharedModule } from '../shared/shared.module';
-import { FriendsService } from './shared/friends.service';
+
 
 
 @NgModule({
@@ -18,8 +18,5 @@ import { FriendsService } from './shared/friends.service';
     UserProfileComponent,
     UserFriendsComponent,
   ],
-  providers: [
-    FriendsService
-  ]
 })
 export class UserModule {}

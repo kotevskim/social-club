@@ -5,9 +5,10 @@ import {Component, OnInit} from '@angular/core';
 
 import 'firebase/storage';
 import {Friend} from '../shared/friend';
-import {FriendsService} from '../shared/friends.service';
+
 import {UserManagementService} from '../../core/user-management.service';
 import { User as AuthUser } from '@firebase/auth-types';
+import { FriendsService } from '../../core/friends.service';
 // import {User} from '../shared/user';
 
 @Component({
@@ -43,7 +44,7 @@ export class UserFriendsComponent implements OnInit {
       //         this.rightArrowVisible();
       //     });
 
-      private loadFriedList(uid: string) {
+      private loadFriendList(uid: string) {
         if (this.friendService.isFriendListCached()) {
           this.friendService.getFriendsFromCache().subscribe(
             friends => {
@@ -78,7 +79,7 @@ export class UserFriendsComponent implements OnInit {
           user => {
             console.log('DEBUG ::: Current user loaded from cache');
             this.currentUser = user;
-            this.loadFriedList(this.currentUser.uid);
+            this.loadFriendList(this.currentUser.uid);
         });
       } else {
          // the page has been refreshed (there is an active user)
@@ -92,7 +93,7 @@ export class UserFriendsComponent implements OnInit {
                 this.currentUser = user;
               }
             );
-            this.loadFriedList(this.currentUser.uid);
+            this.loadFriendList(this.currentUser.uid);
           });
         }
     }

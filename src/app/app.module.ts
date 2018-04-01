@@ -24,7 +24,7 @@ import { AboutComponent } from './static/about/about.component';
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     // AuthenticationModule,
-    UserModule, // ??? what if imported
+    // UserModule, // ??? what if imported
     SharedModule.forRoot(),
     CoreModule,
     // ChatModule

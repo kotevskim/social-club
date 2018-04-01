@@ -32,27 +32,35 @@
   <div class="row">
     <div class="col-md-2"></div>
       <div class="col-12 col-md-8">
-          <div class="input-group search-toolbar">
-            <input type="text" class="form-control" placeholder="Search friends...">
-            <span class="input-group-btn">
-              <button class="btn btn-danger btn" type="button">
-                <fa name="search"></fa>
-              </button>
-            </span>
+        <div class="input-group search-toolbar">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Search friends..."
+            (keyup)="onSearch($event)"
+            data-toggle="dropdown">
+          <span class="input-group-btn">
+            <button class="btn btn-danger btn" type="button">
+              <fa name="search"></fa>
+            </button>
+          </span>
+          <div class="dropdown-menu">
+            <div class="list-group" *ngFor="let user of searchedUsers">
+              <div class="list-group-item list-group-item-action">
+                <div class="row">
+                  <span class=col-2>
+                    <img class="rounded-circle" src={{user.image}}>
+                  </span>
+                  <span class=col-10>{{user?.name}}</span>
+                  <!-- <button class="col-2 btn btn-sm btn-success">Add</button> -->
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
         </div>
   </div>
 
 
-
-  <!-- <form class="form my-2 my-lg-0">
-    <div class="row">
-      <span class="col-2"></span>
-        <input class="form-control colcol-md-7 mr-sm-2" type="text"
-        placeholder="Search friends..." aria-label="Search">
-        <button class="col-md-1 btn btn-outline-danger my-2 my-sm-0"
-        type="submit">Search</button>
-      </div>
-      </form> -->
   <router-outlet></router-outlet>
 </div>

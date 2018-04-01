@@ -1,4 +1,3 @@
-import { FriendsService } from './../shared/friends.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { EditDialogComponent } from '../../shared/edit-dialog/edit-dialog.component';
@@ -8,6 +7,7 @@ import { EditType } from '../../shared/edit-dialog/edit-details';
 import { User } from '../shared/user';
 import { AuthenticationService } from '../../core/authentication.service';
 import { User as AuthUser } from '@firebase/auth-types';
+import { FriendsService } from '../../core/friends.service';
 
 
 

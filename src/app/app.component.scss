@@ -9,5 +9,39 @@ input {
   border: none;
 }
 
+input:focus {
+  background-color: rgb(38, 41, 43);
+}
+
+.dropdown-menu {
+  width: 100%;
+  background-color: #1d1f20;
+  padding-bottom: 0px;
+  padding-top: 0px;
+
+  .list-group-item {
+    background-color: rgb(38, 41, 43);
+    color: whitesmoke;
+    border-bottom-color: rgb(64, 74, 80);;
+    border-top: none;
+  }
+
+  .list-group-item:hover {
+    cursor: pointer;
+    background-color: rgb(64, 74, 80);
+    font-weight: bold;
+
+    img {
+      -webkit-filter: blur(0px); /* Safari 6.0 - 9.0 */
+      filter: blur(0px);
+    }
+  }
+
+  img {
+    width: 50px;
+    -webkit-filter: blur(1px); /* Safari 6.0 - 9.0 */
+    filter: blur(1px);
+  }
+}
 
 
